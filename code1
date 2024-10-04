@@ -1,0 +1,60 @@
+Code and Explanation 
+Search insert position
+CODE:
+class Solution {
+    public int searchInsert(int[] nums, int target) { 
+           int start = 0;
+        int end = nums.length - 1; 
+
+        while (start <= end) {
+           int mid = start + (end - start) / 2; 
+            
+            if (nums[mid] == target) {
+                return mid;  
+            }
+            if (target < nums[mid]) {
+                end = mid - 1; 
+            } else {
+                start = mid + 1;
+            }
+        }
+        
+        return start; 
+    }
+}
+
+Explanation of the Approach
+Initialization:
+
+The method starts by initializing two pointers: start (at the beginning of the array) and end (at the last index of the array).
+Binary Search Loop:
+
+The loop continues while start is less than or equal to end.
+Inside the loop, it calculates the middle index mid using the formula start + (end - start) / 2 to avoid potential overflow.
+It then checks:
+If the middle element nums[mid] is equal to the target, it returns mid (the index of the target).
+If the target is less than nums[mid], it narrows the search to the left half of the array by setting end to mid - 1.
+If the target is greater than nums[mid], it narrows the search to the right half by setting start to mid + 1.
+Insertion Position:
+
+If the loop exits without finding the target, it returns start, which represents the correct index where the target should be inserted.
+Time Complexity
+Time Complexity: 
+𝑂
+(
+log
+⁡
+𝑛
+)
+O(logn)
+The algorithm halves the search space with each iteration (binary search), leading to logarithmic time complexity, where 
+𝑛
+n is the number of elements in the input array nums.
+Space Complexity
+Space Complexity: 
+𝑂
+(
+1
+)
+O(1)
+The algorithm uses a constant amount of space (just a few variables for indices), making it efficient in terms of space complexity.
