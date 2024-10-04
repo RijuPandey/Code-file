@@ -1,0 +1,52 @@
+# Code with the explanation of Count the Negative numbers in a Sorted matrix.
+
+CODE:
+class Solution {
+    public int countNegatives(int[][] grid) {
+     int n=grid.length;
+     int m=grid[0].length;
+     int r=n-1;
+     int c=0;
+     int count=0;
+     while(r>=0&&c<m){
+        if(grid[r][c]<0){
+            r--;
+            count=count+(m-c);
+        }
+        else{
+            ++c;
+        }
+     }
+     return count;
+    }
+}
+
+# Approach:
+Initialization:
+
+n = grid.length; – This stores the number of rows in the matrix.
+m = grid[0].length; – This stores the number of columns in the matrix.
+r = n - 1; – This initializes r to the index of the last row.
+c = 0; – This initializes c to the index of the first column.
+count = 0; – This will keep track of the total number of negative numbers found.
+While loop: The loop runs as long as r >= 0 (i.e., we are within the valid row index) and c < m (i.e., we are within the valid column index).
+
+Condition if (grid[r][c] < 0):
+
+If the current element grid[r][c] is negative, it means all elements in the current row to the right of c will also be negative (since the matrix is sorted row-wise and column-wise in non-increasing order).
+Add all remaining negative elements in the row (m - c) to count (since they are all negative).
+Move one row up by decrementing r (r--).
+Else (grid[r][c] >= 0):
+
+If the current element is non-negative, move to the next column by incrementing c (++c).
+Return count: After the loop finishes, count holds the total number of negative numbers in the matrix.
+
+
+# Time Complexity:
+Outer loop: The loop runs while r >= 0 && c < m. In each iteration, either r is decremented (moving up a row) or c is incremented (moving to the next column).
+In the worst case, we will visit each row or each column exactly once. Since the matrix has n rows and m columns, the loop will run at most n + m times.
+Hence, the time complexity is O(n + m).
+
+
+# Space Complexity:
+The space complexity is O(1) because we are using a constant amount of extra space regardless of the size of the matrix. The only additional space used is for a few integer variables (n, m, r, c, count).
