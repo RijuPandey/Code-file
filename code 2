@@ -1,0 +1,80 @@
+Code of Search element in rotated sorted array1:
+
+CODE:
+class Solution {
+    public int search(int[] nums, int target) {
+            int start = 0;
+        int end = nums.length - 1;  
+
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
+
+            if (target == nums[mid]) {
+                return mid;  
+            }
+
+             
+            if (nums[start] <= nums[mid]) {
+                if (target >= nums[start] && target < nums[mid]) {
+                    end = mid - 1;   
+                } else {
+                    start = mid + 1;  
+                }
+            }
+            
+            else {
+                if (target > nums[mid] && target <= nums[end]) {
+                    start = mid + 1;  
+                } else {
+                    end = mid - 1;  
+                }
+            }
+        }
+
+        return -1;
+    }
+}
+
+#APPROACH:
+Binary Search Setup:
+
+The algorithm starts by initializing two pointers: start at index 0 and end at the last index (nums.length - 1).
+We compute the middle index mid = start + (end - start) / 2.
+
+Target Found:
+
+If the middle element nums[mid] is equal to the target, we return the index mid.
+
+Check if Left Half is Sorted:
+
+If nums[start] <= nums[mid], it means the left half of the array (from start to mid) is sorted.
+We then check if the target lies within this sorted half by checking if nums[start] <= target < nums[mid].
+If true, the target must be in the left half, so we move the end pointer to mid - 1.
+Otherwise, the target must be in the right half, so we move the start pointer to mid + 1.
+
+Check if Right Half is Sorted:
+
+If the left half is not sorted, then the right half (from mid to end) must be sorted.
+We check if the target lies within this sorted half by checking if nums[mid] < target <= nums[end].
+If true, the target is in the right half, so we move the start pointer to mid + 1.
+Otherwise, we search the left half by moving the end pointer to mid - 1.
+Return -1:
+
+If the while loop ends without finding the target, 
+return -1 (the target is not in the array).
+
+#TIME COMPLEXITY:
+
+Best Case: O(log n) (like regular binary search)
+
+Each iteration halves the search space, leading to a logarithmic time complexity.
+Worst Case: O(log n) (even for the rotated case)
+
+Despite the rotation, we can still determine which half is sorted and halve the
+search space, maintaining the logarithmic complexity.
+
+#SPACE COMPLEXITY:
+
+:O(1) (constant space)
+ We are only using a few pointers (start, end, mid) and
+ not allocating any extra memory based on the input size.
