@@ -1,0 +1,51 @@
+Code and "Explanation" of Majority "Element"
+
+CODE:
+class Solution {
+    public int majorityElement(int[] nums) {
+       int freq=0;
+       int ans=0;
+       for(int i=0;i<nums.length;i++){
+        if(freq==0){
+            ans=nums[i];
+        }
+        if(ans==nums[i]){
+            freq++;
+        }
+        else{
+            freq--;
+        }
+       } 
+       return ans;
+    }
+}
+
+Approach Explanation:
+The algorithm works by maintaining two variables:
+
+ans: This represents the candidate for the majority element.
+freq: This tracks how often the candidate has appeared.
+Here's how the algorithm progresses:
+
+Initialization:
+freq is initialized to 0.
+ans is initialized to 0 (or any arbitrary value since it will be replaced later).
+Iterating through the array:
+For each element in the array (nums[i]), the algorithm checks if freq is 0. If so, it updates the candidate (ans) to the current element (nums[i]).
+If the current element matches the candidate (ans), it increments freq, suggesting that the candidate appears again.
+If the current element does not match ans, it decrements freq, suggesting that this candidate is losing its majority.
+Final result:
+By the end of the loop, the value in ans is the majority element. This works because the majority element (appearing more than n/2 times) will always survive through the increments and decrements of freq.
+
+
+Time Complexity
+The algorithm only traverses the array once, in a single for loop.
+Each iteration consists of a constant number of operations (checking conditions, updating variables), so the time complexity is proportional to the number of elements in the array, n.
+Thus, the time complexity is:
+
+O(n), where n is the size of the input array nums.
+
+Space Complexity:
+The algorithm uses a fixed amount of extra space, regardless of the size of the input array:
+freq and ans are both integer variables.
+No additional data structures (like arrays or hashmaps) are used.
