@@ -1,0 +1,63 @@
+Code and Explanation of Remove duplicates from an array:
+
+CODE:
+     int j = 1; // Start from 1, as we are already placing the first element
+        int count = 1; // Count occurrences of the current number
+
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] == nums[i - 1]) {
+                count++; // Increment count if we encounter a duplicate
+            } else {
+                count = 1; // Reset count when we find a new number
+            }
+
+            if (count <= 2) { // Allow the number to appear at most twice
+                nums[j] = nums[i]; // Place the valid number at the current position of j
+                j++; // Increment j only when placing a valid element
+            }
+        }
+
+        return j;
+
+APPROACH AND TIME,SPACE COMPLEXITY:
+
+Approach
+
+The approach of this algorithm is based on the two-pointer technique, where:
+
+One pointer i iterates through the array to inspect each element.
+The other pointer j keeps track of the position where the next valid element (an element that appears at most twice) should be placed.
+
+Steps:
+
+Initialization:
+
+We start with j = 1, assuming the first element is always valid (since it's the first occurrence).
+count is initialized to 1 to track the occurrences of the current number.
+Traversing the array:
+
+We iterate through the array starting from index 1 (i = 1) because the first element is already considered valid.
+For each element nums[i], we compare it with the previous element (nums[i - 1]):
+If they are the same, we increase count (since it's a duplicate).
+If they are different, we reset count to 1 (because we've encountered a new element).
+We allow placing an element in its current position (tracked by j) only if its count is less than or equal to 2. This ensures that each element appears at most twice.
+Placing valid elements:
+
+When an element is valid (i.e., count <= 2), we place it at nums[j] and increment j.
+After completing the iteration, j will represent the length of the modified array with no more than two duplicates.
+Return:
+
+Finally, the method returns j, which gives the length of the array with all duplicates removed except for two allowed occurrences.
+
+Time Complexity: O(n)
+
+The time complexity is linear, O(n), where n is the length of the input array nums.
+This is because we iterate through the array exactly once, performing constant-time operations (checking and updating values) in each iteration.
+No nested loops are involved, so each element is processed once.
+
+Space Complexity: O(1)
+
+The algorithm uses a constant amount of extra space:
+We use only a few integer variables (j, count), which do not depend on the size of the input.
+The input array nums is modified in place, meaning no additional space is required for a new array.
+Therefore, the space complexity is O(1).
